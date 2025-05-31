@@ -46,7 +46,7 @@ function App() {
         {/* Main Content */}
         <Box display="flex" flexDirection="column" alignItems="center" py={6}>
           <Typography variant="h4" gutterBottom>
-            Welcome to the Magical App ✨
+            Welcome
           </Typography>
           <Button variant="outlined" onClick={() => setOpenLogin(true)}>
             Login
