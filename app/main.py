@@ -82,3 +82,21 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Invalid username or password")
     
     return {"message": "Login successful", "username": db_user.username}
+
+
+class Token(BaseModel):
+    token: str
+
+
+# ---------- Google ----------
+
+@app.post("/auth/google")
+def verify_google_token(data: Token):
+    response = requests.get(
+        f"https://oauth2.googleapis.com/tokeninfo?id_token={data.token}"
+    )
+    if response.status_code != 200:
+        raise HTTPException(status_code=400, detail="Invalid Google token")
+
+    user_info = response.json()
+    return {"email": user_info["email"], "name": user_info.get("name")}
