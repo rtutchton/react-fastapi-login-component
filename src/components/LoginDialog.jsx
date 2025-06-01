@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import API from "../api";
-import GoogleLoginButton from "./GoogleLoginButton";
+import GoogleAndAppleLoginButtons from "./GoogleAndAppleLogins";
 
 export default function LoginDialog({ open, onClose, onLoginSuccess }) {
   const [username, setUsername] = useState("");
@@ -58,11 +58,7 @@ export default function LoginDialog({ open, onClose, onLoginSuccess }) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Typography align="center" sx={{ mt: 2 }}>Or</Typography>
-        <GoogleLoginButton onLoginSuccess={(user) => {
-          console.log("Logged in as:", user);
-          onLoginSuccess?.(user.name || user.email);
-          onClose();
-        }} />
+        <GoogleAndAppleLoginButtons onLoginSuccess={onLoginSuccess}/>
         <Typography color="error" sx={{ mt: 1 }}>
           {message}
         </Typography>
